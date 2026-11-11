@@ -1,0 +1,1672 @@
+/* =========================================================
+   RESUMEAI - SMART RESUME ANALYZER
+   MODERN PREMIUM UI
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.08), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(99, 102, 241, 0.08), transparent 30%),
+        #f8f7fc;
+    color: #24213a;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    width: 100%;
+    padding: 18px 0;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+
+    backdrop-filter: blur(18px);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.nav-container {
+    width: min(1120px, 92%);
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #8b5cf6
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    letter-spacing: -0.5px;
+}
+
+
+.nav-text {
+    font-size: 14px;
+    color: #77738a;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+
+    padding: 105px 20px 120px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(139, 92, 246, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(99, 102, 241, 0.15),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f6f2ff 100%
+        );
+}
+
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    top: -150px;
+    left: -100px;
+}
+
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    bottom: -140px;
+    right: -80px;
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(900px, 92%);
+    margin: auto;
+
+    text-align: center;
+
+    animation: heroFade 0.8s ease;
+}
+
+
+.hero-content h1 {
+    font-size: clamp(42px, 6vw, 72px);
+
+    line-height: 1.18;
+
+    letter-spacing: -2.5px;
+
+    font-weight: 800;
+
+    color: #201b36;
+
+    margin-bottom: 24px;
+}
+
+
+.hero-content h1 span {
+    display: inline-block;
+    padding-bottom: 6px;
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #8b5cf6,
+        #6366f1
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.hero-content p {
+    max-width: 680px;
+
+    margin: 0 auto 34px;
+
+    font-size: 18px;
+
+    color: #716d80;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   CHECK YOUR RESUME BUTTON
+========================================================= */
+
+.check-resume-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 15px 28px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #8b5cf6
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 30px rgba(109, 40, 217, 0.24);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.check-resume-btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 38px rgba(109, 40, 217, 0.30);
+}
+
+
+.check-resume-btn:active {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.analyzer-section,
+.results-section,
+.features-section {
+    width: min(1120px, 92%);
+
+    margin: auto;
+}
+
+
+.analyzer-section {
+    padding: 90px 0 80px;
+}
+
+
+.results-section {
+    padding: 20px 0 90px;
+}
+
+
+.features-section {
+    padding: 60px 0 100px;
+}
+
+
+.section-heading {
+    text-align: center;
+
+    margin-bottom: 42px;
+}
+
+
+.section-heading h2 {
+    font-size: 34px;
+
+    color: #28223f;
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+
+    margin-bottom: 10px;
+}
+
+
+.section-heading p {
+    color: #77738a;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.error-message {
+    max-width: 800px;
+
+    margin: 0 auto 25px;
+
+    padding: 15px 18px;
+
+    border-radius: 12px;
+
+    background: #fff1f2;
+
+    border: 1px solid #fecdd3;
+
+    color: #be123c;
+
+    text-align: center;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ANALYZER FORM
+========================================================= */
+
+.analyzer-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    align-items: stretch;
+}
+
+
+.upload-card,
+.job-card {
+    background: rgba(255, 255, 255, 0.92);
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 12px 40px rgba(35, 25, 70, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.upload-card:hover,
+.job-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 48px rgba(35, 25, 70, 0.09);
+
+    border-color: rgba(124, 58, 237, 0.18);
+}
+
+
+.upload-card h3,
+.job-card h3 {
+    font-size: 20px;
+
+    color: #292340;
+
+    margin-bottom: 6px;
+}
+
+
+.upload-card > p,
+.job-card > p {
+    color: #817d90;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   UPLOAD BOX
+========================================================= */
+
+.upload-box {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 250px;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    border: 2px dashed #c9b8f5;
+
+    background:
+        linear-gradient(
+            145deg,
+            #faf8ff,
+            #f7f4ff
+        );
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.upload-box:hover {
+    background: #f3edff;
+
+    border-color: #8b5cf6;
+
+    transform: translateY(-2px);
+}
+
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+
+.upload-icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #ede9fe;
+
+    font-size: 30px;
+
+    margin-bottom: 15px;
+}
+
+
+.upload-title {
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #312750;
+
+    margin-bottom: 5px;
+}
+
+
+.upload-subtitle {
+    font-size: 13px;
+
+    color: #8a8598;
+}
+
+
+.file-name {
+    margin-top: 16px;
+
+    padding: 11px 14px;
+
+    border-radius: 10px;
+
+    background: #f7f5fb;
+
+    color: #655f75;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   JOB DESCRIPTION
+========================================================= */
+
+.job-card {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.job-card textarea {
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 250px;
+
+    resize: vertical;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    border: 1px solid #ddd7ea;
+
+    background: #fcfbfe;
+
+    color: #302b42;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.job-card textarea::placeholder {
+    color: #aaa5b5;
+}
+
+
+.job-card textarea:focus {
+    background: white;
+
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 4px rgba(139, 92, 246, 0.10);
+}
+
+
+.character-count {
+    margin-top: 10px;
+
+    text-align: right;
+
+    font-size: 12px;
+
+    color: #9994a5;
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+========================================================= */
+
+.analyze-btn {
+    grid-column: 1 / -1;
+
+    justify-self: center;
+
+    min-width: 230px;
+
+    padding: 16px 32px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #8b5cf6
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(109, 40, 217, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.analyze-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 38px rgba(109, 40, 217, 0.30);
+}
+
+
+.analyze-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.score-card {
+    display: grid;
+
+    grid-template-columns: 240px 1fr;
+
+    align-items: center;
+
+    gap: 45px;
+
+    padding: 42px;
+
+    margin-bottom: 25px;
+
+    background: white;
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 14px 45px rgba(35, 25, 70, 0.07);
+}
+
+
+/* =========================================================
+   SCORE CIRCLE
+========================================================= */
+
+.score-circle {
+    width: 190px;
+    height: 190px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 55%,
+            transparent 56%
+        ),
+        conic-gradient(
+            #7c3aed,
+            #8b5cf6,
+            #6366f1,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 15px 35px rgba(109, 40, 217, 0.18);
+}
+
+
+.score-number {
+    font-size: 42px;
+
+    font-weight: 800;
+
+    color: #302450;
+
+    line-height: 1;
+}
+
+
+.score-label {
+    margin-top: 7px;
+
+    font-size: 13px;
+
+    color: #858092;
+
+    font-weight: 600;
+}
+
+
+.match-info h3 {
+    font-size: 29px;
+
+    color: #6d28d9;
+
+    margin-bottom: 10px;
+}
+
+
+.match-info p {
+    color: #716d80;
+
+    font-size: 16px;
+
+    max-width: 650px;
+}
+
+
+/* =========================================================
+   SKILLS DASHBOARD
+========================================================= */
+
+.skills-dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-bottom: 25px;
+}
+
+
+.skills-card {
+    background: white;
+
+    border: 1px solid rgba(124, 58, 237, 0.09);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    min-height: 180px;
+
+    box-shadow:
+        0 10px 35px rgba(35, 25, 70, 0.05);
+}
+
+
+.skills-card h3 {
+    color: #30294a;
+
+    font-size: 19px;
+
+    margin-bottom: 18px;
+}
+
+
+.skills-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+
+.skill-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: #ede9fe;
+
+    color: #5b21b6;
+
+    border: 1px solid #ddd0ff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.skill-badge:hover {
+    transform: translateY(-2px);
+
+    background: #e4dcff;
+}
+
+
+.missing-badge {
+    background: #fff1f2;
+
+    border-color: #fecdd3;
+
+    color: #be123c;
+}
+
+
+.missing-badge:hover {
+    background: #ffe4e8;
+}
+
+
+/* =========================================================
+   EXPERIENCE SECTION
+========================================================= */
+
+.experience-section {
+    position: relative;
+
+    background: white;
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    border-radius: 26px;
+
+    padding: 34px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 14px 45px rgba(35, 25, 70, 0.06);
+}
+
+
+.experience-heading {
+    margin-bottom: 25px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #eeeaf5;
+}
+
+
+.experience-heading h3 {
+    font-size: 23px;
+
+    color: #30294a;
+
+    margin-bottom: 5px;
+}
+
+
+.experience-heading p {
+    color: #858092;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   EXPERIENCE COMPARISON
+========================================================= */
+
+.experience-comparison {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+.experience-compare-card {
+    display: flex;
+
+    gap: 16px;
+
+    align-items: flex-start;
+
+    padding: 24px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(135deg, #fbfaff, #f8f6ff);
+
+    border: 1px solid #ebe4fb;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.experience-compare-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(109, 40, 217, 0.08);
+}
+
+
+.experience-card-icon {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #ede9fe;
+
+    font-size: 22px;
+}
+
+
+.experience-card-label {
+    display: block;
+
+    color: #7c3aed;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+
+.experience-compare-card h4 {
+    color: #32284f;
+
+    font-size: 17px;
+
+    margin-bottom: 7px;
+}
+
+
+.experience-main-value {
+    color: #4c2a85;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+}
+
+
+.experience-small-text {
+    color: #716d80;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-top: 7px;
+}
+
+
+.internship-note {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 7px 10px;
+
+    border-radius: 9px;
+
+    background: white;
+
+    border: 1px solid #ddd5ed;
+
+    color: #5b21b6;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EXPERIENCE STATUS
+========================================================= */
+
+.experience-status {
+    display: flex;
+
+    gap: 15px;
+
+    align-items: flex-start;
+
+    padding: 20px 22px;
+
+    border-radius: 18px;
+
+    margin-bottom: 28px;
+
+    border: 1px solid;
+}
+
+
+.experience-status-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+.experience-status-content h4 {
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+
+.experience-status-content p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+.experience-success {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+
+.experience-success .experience-status-icon {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+.experience-danger {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    color: #9f1239;
+}
+
+
+.experience-danger .experience-status-icon {
+    background: #ffe4e8;
+    color: #be123c;
+}
+
+
+.experience-warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #92400e;
+}
+
+
+.experience-warning .experience-status-icon {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+
+.experience-neutral {
+    background: #f8f7fc;
+    border-color: #e5e1ef;
+    color: #514b61;
+}
+
+
+.experience-neutral .experience-status-icon {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+
+.experience-gap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+
+.experience-gap span {
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    border: 1px solid rgba(124, 58, 237, 0.10);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   WHAT YOU HAVE DONE
+========================================================= */
+
+.candidate-experience-heading {
+    margin-bottom: 15px;
+}
+
+
+.candidate-experience-heading h4 {
+    color: #30294a;
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+
+.candidate-experience-heading p {
+    color: #858092;
+    font-size: 13px;
+}
+
+
+.experience-entry {
+    position: relative;
+
+    padding: 25px 25px 25px 28px;
+
+    margin-bottom: 18px;
+
+    border-radius: 18px;
+
+    background: linear-gradient(135deg, #fbfaff, #f8f6ff);
+
+    border: 1px solid #ebe4fb;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+
+.experience-entry:last-child {
+    margin-bottom: 0;
+}
+
+
+.experience-entry:hover {
+    transform: translateX(4px);
+
+    border-color: #d8c9fa;
+
+    box-shadow: 0 10px 30px rgba(109, 40, 217, 0.08);
+}
+
+
+.experience-entry::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 22px;
+    bottom: 22px;
+
+    width: 4px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(180deg, #6d28d9, #8b5cf6);
+}
+
+
+.experience-entry h4 {
+    font-size: 20px;
+    color: #32284f;
+    margin-bottom: 8px;
+}
+
+
+.experience-company {
+    color: #6d28d9;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+
+.experience-duration {
+    color: #858092;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+
+.experience-description {
+    margin-top: 10px;
+}
+
+
+.experience-description strong,
+.experience-technologies strong {
+    color: #40365d;
+    font-size: 13px;
+}
+
+
+.experience-description p {
+    color: #716d80;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 5px;
+}
+
+
+.experience-technologies {
+    margin-top: 18px;
+}
+
+
+.experience-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+
+.experience-tech-badge {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #ddd5ed;
+    color: #5b21b6;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   NO EXPERIENCE
+========================================================= */
+
+.no-experience {
+    text-align: center;
+    padding: 45px 20px;
+    border-radius: 18px;
+    background: #faf9fd;
+    border: 1px dashed #dcd5e8;
+}
+
+
+.no-experience-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+
+.no-experience h4 {
+    font-size: 18px;
+    color: #3a3350;
+    margin-bottom: 5px;
+}
+
+
+.no-experience p {
+    max-width: 500px;
+    margin: auto;
+    color: #858092;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RECOMMENDATION
+========================================================= */
+
+.recommendation-card {
+    position: relative;
+
+    padding: 27px 30px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1ebff,
+            #f7f3ff
+        );
+
+    border: 1px solid #ddd0fa;
+
+    box-shadow:
+        0 10px 30px rgba(109, 40, 217, 0.05);
+}
+
+
+.recommendation-card h3 {
+    font-size: 19px;
+
+    color: #4c2a85;
+
+    margin-bottom: 8px;
+}
+
+
+.recommendation-card p {
+    color: #6e6580;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features-section {
+    border-top: 1px solid rgba(124, 58, 237, 0.08);
+}
+
+
+.features-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.feature-card {
+    padding: 28px 22px;
+
+    background: white;
+
+    border: 1px solid rgba(124, 58, 237, 0.09);
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(35, 25, 70, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.feature-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(35, 25, 70, 0.08);
+}
+
+
+.feature-icon {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #f0eaff;
+
+    font-size: 26px;
+}
+
+
+.feature-card h3 {
+    font-size: 17px;
+
+    color: #332b49;
+
+    margin-bottom: 7px;
+}
+
+
+.feature-card p {
+    color: #858092;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    text-align: center;
+    padding: 25px;
+    background: #17243a;
+    color: white;
+    margin-top: 40px;
+    font-size: 14px;
+}
+
+.footer p {
+    margin: 8px 0;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes heroFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .features-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .score-card {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+    }
+
+
+    .match-info p {
+        margin: auto;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 15px 0;
+    }
+
+
+    .nav-container {
+        width: 90%;
+    }
+
+
+    .nav-text {
+        display: none;
+    }
+
+
+    .hero {
+        padding: 75px 15px 90px;
+    }
+
+
+    .hero-content h1 {
+        font-size: 43px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
+
+    .analyzer-section,
+    .results-section,
+    .features-section {
+        width: 90%;
+    }
+
+
+    .analyzer-section {
+        padding-top: 65px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+
+    .analyzer-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .analyze-btn {
+        grid-column: auto;
+
+        width: 100%;
+    }
+
+
+    .skills-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+
+    .score-card {
+        padding: 30px 20px;
+    }
+
+
+    .score-circle {
+        width: 165px;
+        height: 165px;
+    }
+
+
+    .score-number {
+        font-size: 36px;
+    }
+
+
+    .experience-section {
+        padding: 22px;
+    }
+
+
+    .experience-comparison {
+        grid-template-columns: 1fr;
+    }
+
+
+    .experience-compare-card {
+        padding: 20px;
+    }
+
+
+    .experience-status {
+        padding: 17px;
+    }
+
+
+    .experience-gap {
+        flex-direction: column;
+    }
+
+
+    .experience-entry {
+        padding: 22px 20px 22px 23px;
+    }
+
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .upload-card,
+    .job-card {
+        padding: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .hero-content h1 {
+        font-size: 37px;
+    }
+
+
+    .check-resume-btn {
+        width: 100%;
+    }
+
+
+    .score-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+
+    .match-info h3 {
+        font-size: 24px;
+    }
+
+}

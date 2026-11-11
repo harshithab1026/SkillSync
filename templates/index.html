@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSync</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <div class="logo">
+                SkillSync
+            </div>
+
+            <div class="nav-text">
+                Sync your skills. Find your fit.
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         HERO SECTION
+    ====================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Analyze Your Resume
+                <span>Smartly</span>
+            </h1>
+
+
+            <p>
+                Upload your resume and compare it with a job
+                description to discover your skill match,
+                experience and missing skills.
+            </p>
+
+
+            <!-- CHECK BUTTON -->
+
+            <a
+                href="#analyzer"
+                class="check-resume-btn"
+            >
+                Check Your Resume →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ANALYZER SECTION
+    ====================================================== -->
+
+    <section
+        class="analyzer-section"
+        id="analyzer"
+    >
+
+        <div class="section-heading">
+
+            <h2>
+                Resume Analyzer
+            </h2>
+
+            <p>
+                Upload your PDF resume and enter the job
+                description below.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ERROR MESSAGE
+        ================================================== -->
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form
+            action="/"
+            method="POST"
+            enctype="multipart/form-data"
+            class="analyzer-form"
+        >
+
+
+            <!-- =============================================
+                 RESUME UPLOAD
+            ============================================== -->
+
+            <div class="upload-card">
+
+                <h3>
+                    Upload Resume
+                </h3>
+
+
+                <p>
+                    Select your resume in PDF format
+                </p>
+
+
+                <label
+                    for="resume"
+                    class="upload-box"
+                >
+
+                    <div class="upload-icon">
+                        📄
+                    </div>
+
+
+                    <div class="upload-title">
+                        Choose PDF Resume
+                    </div>
+
+
+                    <div class="upload-subtitle">
+                        Click here to select your file
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="resume"
+                        name="resume"
+                        accept=".pdf,application/pdf"
+                        required
+                    >
+
+                </label>
+
+
+                <div
+                    id="fileName"
+                    class="file-name"
+                >
+                    No file selected
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 JOB DESCRIPTION
+            ============================================== -->
+
+            <div class="job-card">
+
+                <h3>
+                    Job Description
+                </h3>
+
+
+                <p>
+                    Paste the job description you want to
+                    compare with.
+                </p>
+
+
+                <textarea
+                    id="job_description"
+                    name="job_description"
+                    placeholder="Paste the job description here..."
+                    maxlength="5000"
+                    required
+                ></textarea>
+
+
+                <div class="character-count">
+
+                    <span id="charCount">
+                        0
+                    </span>
+
+                    / 5000 characters
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 ANALYZE BUTTON
+            ============================================== -->
+
+            <button
+                type="submit"
+                class="analyze-btn"
+            >
+
+                Analyze Resume
+
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RESULTS
+    ====================================================== -->
+
+    {% if score is defined %}
+
+    <section
+        class="results-section"
+        id="results"
+    >
+
+
+        <div class="section-heading">
+
+            <h2>
+                Analysis Results
+            </h2>
+
+            <p>
+                Here's how your resume matches the job
+                description.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCORE
+        ================================================== -->
+
+        <div class="score-card">
+
+            <div class="score-circle">
+
+                <div
+                    class="score-number"
+                    id="scoreNumber"
+                    data-score="{{ score }}"
+                >
+
+                    <span id="animatedScore">
+                        0
+                    </span>%
+
+                </div>
+
+
+                <div class="score-label">
+                    Match Score
+                </div>
+
+            </div>
+
+
+            <div class="match-info">
+
+                <h3>
+                    {{ match_level }}
+                </h3>
+
+
+                <p>
+                    {{ recommendation }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SKILLS DASHBOARD
+        ================================================== -->
+
+        <div class="skills-dashboard">
+
+
+            <!-- MATCHING SKILLS -->
+
+            <div class="skills-card">
+
+                <h3>
+                    Matching Skills ✅
+                </h3>
+
+
+                <div class="skills-list">
+
+                    {% if matching_skills %}
+
+                        {% for skill in matching_skills %}
+
+                        <span class="skill-badge">
+                            {{ skill }}
+                        </span>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p>
+                            No matching skills found.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MISSING SKILLS -->
+
+            <div class="skills-card">
+
+                <h3>
+                    Missing Skills ⚠️
+                </h3>
+
+
+                <div class="skills-list">
+
+                    {% if missing_skills %}
+
+                        {% for skill in missing_skills %}
+
+                        <span class="skill-badge missing-badge">
+                            {{ skill }}
+                        </span>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p>
+                            No missing skills.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             EXPERIENCE ANALYSIS
+        ================================================== -->
+
+        <div class="experience-section">
+
+            <div class="experience-heading">
+
+                <h3>
+                    💼 Experience Analysis
+                </h3>
+
+                <p>
+                    Compare the experience requirement in the
+                    job description with the experience
+                    detected in your resume.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 JOB DESCRIPTION VS RESUME
+            ================================================== -->
+
+            <div class="experience-comparison">
+
+
+                <!-- =============================================
+                     JOB DESCRIPTION CARD
+                ============================================== -->
+
+                <div class="experience-compare-card job-experience-card">
+
+                    <div class="experience-card-icon">
+                        📋
+                    </div>
+
+
+                    <div>
+
+                        <span class="experience-card-label">
+                            JOB DESCRIPTION
+                        </span>
+
+
+                        <h4>
+                            {{ experience_analysis.status_label }}
+                        </h4>
+
+
+                        <div class="experience-main-value">
+                            {{ experience_analysis.text }}
+                        </div>
+
+
+                        {% if experience_analysis.type == "not_specified" %}
+
+                            <p class="experience-small-text">
+
+                                No clear minimum or preferred
+                                experience level was found in
+                                the job description.
+
+                            </p>
+
+
+                        {% elif experience_analysis.type == "none" %}
+
+                            <p class="experience-small-text">
+
+                                Freshers and candidates without
+                                prior professional experience
+                                can be considered.
+
+                            </p>
+
+
+                        {% else %}
+
+                            <p class="experience-small-text">
+
+                                {{ experience_analysis.status_label }}
+                                stated by the job description.
+
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     YOUR RESUME CARD
+                ============================================== -->
+
+                <div class="experience-compare-card resume-experience-card">
+
+                    <div class="experience-card-icon">
+                        👤
+                    </div>
+
+
+                    <div>
+
+                        <span class="experience-card-label">
+                            YOUR RESUME
+                        </span>
+
+
+                        <h4>
+                            Professional Experience
+                        </h4>
+
+
+                        <div class="experience-main-value">
+                            {{ experience_analysis.candidate_display }}
+                        </div>
+
+
+                        <p class="experience-small-text">
+
+                            Professional experience detected
+                            from your resume.
+
+                        </p>
+
+
+                        {% if experience_analysis.internship_months > 0 %}
+
+                            <div class="internship-note">
+
+                                🎓 Internship experience:
+                                {{ experience_analysis.internship_display }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EXPERIENCE STATUS
+            ================================================== -->
+
+            <div class="experience-status {{ experience_analysis.status_class }}">
+
+
+                <div class="experience-status-icon">
+
+                    {% if experience_analysis.status_class == "experience-success" %}
+
+                        ✓
+
+                    {% elif experience_analysis.status_class == "experience-danger" %}
+
+                        ✕
+
+                    {% elif experience_analysis.status_class == "experience-warning" %}
+
+                        ⚠
+
+                    {% else %}
+
+                        ℹ
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <div class="experience-status-content">
+
+
+                    <h4>
+                        {{ experience_analysis.status_title }}
+                    </h4>
+
+
+                    <p>
+                        {{ experience_analysis.status_message }}
+                    </p>
+
+
+
+                    <!-- REQUIRED EXPERIENCE NOT MET -->
+
+                    {% if experience_analysis.type == "required"
+                          and experience_analysis.status == "not_met" %}
+
+                        <div class="experience-gap">
+
+                            <span>
+                                Required:
+                                <strong>
+                                    {{ experience_analysis.text }}
+                                </strong>
+                            </span>
+
+
+                            <span>
+                                Your experience:
+                                <strong>
+                                    {{ experience_analysis.candidate_display }}
+                                </strong>
+                            </span>
+
+
+                            <span>
+                                Gap:
+                                <strong>
+                                    {{ months_to_text(experience_analysis.gap_months) }}
+                                </strong>
+                            </span>
+
+                        </div>
+
+
+                    <!-- PREFERRED EXPERIENCE GAP -->
+
+                    {% elif experience_analysis.type == "preferred"
+                          and experience_analysis.status == "preferred_gap" %}
+
+                        <div class="experience-gap">
+
+                            <span>
+                                Preferred:
+                                <strong>
+                                    {{ experience_analysis.text }}
+                                </strong>
+                            </span>
+
+
+                            <span>
+                                Your experience:
+                                <strong>
+                                    {{ experience_analysis.candidate_display }}
+                                </strong>
+                            </span>
+
+                        </div>
+
+
+                    <!-- REQUIREMENT MET / OTHER REQUIREMENT -->
+
+                    {% elif experience_analysis.type in ["required", "preferred"] %}
+
+                        <div class="experience-gap">
+
+                            <span>
+                                Requirement:
+                                <strong>
+                                    {{ experience_analysis.text }}
+                                </strong>
+                            </span>
+
+
+                            <span>
+                                Your experience:
+                                <strong>
+                                    {{ experience_analysis.candidate_display }}
+                                </strong>
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             RECOMMENDATION
+        ================================================== -->
+
+        <div class="recommendation-card">
+
+            <h3>
+                💡 Recommendation
+            </h3>
+
+
+            <p>
+                {{ recommendation }}
+            </p>
+
+        </div>
+
+
+    </section>
+
+    {% endif %}
+
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="features-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Why Use SkillSync?
+            </h2>
+
+        </div>
+
+
+
+        <div class="features-grid">
+
+
+            <!-- FEATURE 1 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📄
+                </div>
+
+
+                <h3>
+                    Resume Analysis
+                </h3>
+
+
+                <p>
+                    Extracts skills and experience automatically
+                    from your PDF resume.
+                </p>
+
+            </div>
+
+
+
+            <!-- FEATURE 2 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+
+                <h3>
+                    Skill Matching
+                </h3>
+
+
+                <p>
+                    Compares your skills with the requirements
+                    in the job description.
+                </p>
+
+            </div>
+
+
+
+            <!-- FEATURE 3 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💼
+                </div>
+
+
+                <h3>
+                    Experience Detection
+                </h3>
+
+
+                <p>
+                    Identifies professional experience,
+                    internships and technologies used.
+                </p>
+
+            </div>
+
+
+
+            <!-- FEATURE 4 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+
+                <h3>
+                    Match Score
+                </h3>
+
+
+                <p>
+                    Calculates your resume's skill match
+                    percentage.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+    <p>Sync your skills. Find your fit.</p>
+    <p>Designed & Developed by <strong>Harshitha B</strong></p>
+    <p>© 2026 Smart Resume Analyzer. All rights reserved.</p>
+</footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+    // =================================================
+    // FILE SELECTION
+    // =================================================
+
+    const resumeInput =
+        document.getElementById("resume");
+
+    const fileName =
+        document.getElementById("fileName");
+
+
+    if (resumeInput) {
+
+        resumeInput.addEventListener(
+            "change",
+            function () {
+
+                if (resumeInput.files.length > 0) {
+
+                    const selectedFile =
+                        resumeInput.files[0];
+
+                    fileName.textContent =
+                        "Selected: " +
+                        selectedFile.name;
+
+                }
+
+                else {
+
+                    fileName.textContent =
+                        "No file selected";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    // =================================================
+    // CHARACTER COUNTER
+    // =================================================
+
+    const jobDescription =
+        document.getElementById(
+            "job_description"
+        );
+
+
+    const charCount =
+        document.getElementById(
+            "charCount"
+        );
+
+
+    if (jobDescription) {
+
+        jobDescription.addEventListener(
+            "input",
+            function () {
+
+                charCount.textContent =
+                    jobDescription.value.length;
+
+            }
+        );
+
+    }
+
+
+
+    // =================================================
+    // SCORE ANIMATION
+    // =================================================
+
+    const scoreNumber =
+        document.getElementById(
+            "scoreNumber"
+        );
+
+
+    if (scoreNumber) {
+
+        const finalScore =
+            Number(
+                scoreNumber.dataset.score
+            );
+
+
+        const animatedScore =
+            document.getElementById(
+                "animatedScore"
+            );
+
+
+        let currentScore = 0;
+
+
+        const scoreAnimation =
+            setInterval(
+                function () {
+
+                    currentScore++;
+
+
+                    animatedScore.textContent =
+                        currentScore;
+
+
+                    if (
+                        currentScore >=
+                        finalScore
+                    ) {
+
+                        clearInterval(
+                            scoreAnimation
+                        );
+
+                    }
+
+                },
+                20
+            );
+
+    }
+
+
+
+    // =================================================
+    // SMOOTH SCROLL TO ANALYZER
+    // =================================================
+
+    const checkButton =
+        document.querySelector(
+            'a[href="#analyzer"]'
+        );
+
+
+    if (checkButton) {
+
+        checkButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const analyzer =
+                    document.getElementById(
+                        "analyzer"
+                    );
+
+
+                if (analyzer) {
+
+                    analyzer.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    // =================================================
+    // MOVE DIRECTLY TO RESULTS AFTER ANALYSIS
+    // =================================================
+
+    const resultsSection =
+        document.getElementById("results");
+
+
+    if (resultsSection) {
+
+        resultsSection.scrollIntoView({
+            behavior: "instant",
+            block: "start"
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
